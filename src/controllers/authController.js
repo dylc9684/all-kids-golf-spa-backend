@@ -2,6 +2,15 @@ import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+export const users = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json({error: err.message})
+  }
+}
+
 export const register = async (req, res) => {
   try {
     const { name, email, password, age } = req.body;
